@@ -1,6 +1,7 @@
 import { Check } from 'phosphor-react'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { FormEvent, useState } from 'react'
+import { api } from '../lib/axios'
 
 const availabeWeekDays = [
   'Domingo',
@@ -14,19 +15,32 @@ const availabeWeekDays = [
 
 export function NewHabitForm() {
   const [title, setTitle] = useState<string>('');
-  const [week, setWeekDays] = useState<number[]>([]);
+  const [weekDays, setWeekDays] = useState<number[]>([]);
 
-  function createNewHabit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    console.log(title, week)
+  async function createNewHabit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!title || weekDays.length === 0) {
+      return;
+    }
+
+    await api.post("/habits", {
+      title,
+      weekDays,
+    })
+
+    setTitle('');
+    setWeekDays([]);
+
+    alert("Habito Criado com sucesso!");
   }
 
   function handleToggleWeekDay(weekDay: number) {
-    if (week.includes(weekDay)) {
-      const filteredWeek = week.filter(day => day !== weekDay)
+    if (weekDays.includes(weekDay)) {
+      const filteredWeek = weekDays.filter(day => day !== weekDay)
       setWeekDays(filteredWeek)
     } else {
-      setWeekDays([...week, weekDay])
+      setWeekDays([...weekDays, weekDay])
     }
   }
 
@@ -42,6 +56,7 @@ export function NewHabitForm() {
         className="p-4 rounded-lg mt-3 bg-zinc-800 text-white placeholder:text-zinc-400"
         placeholder="Ex: Estudar React"
         autoFocus
+        value={title}
         onChange={event => setTitle(event.target.value)}
       />
 
@@ -56,8 +71,9 @@ export function NewHabitForm() {
         {availabeWeekDays.map((weekDay, index) => {
           return (
             <Checkbox.Root
-              onCheckedChange={() => handleToggleWeekDay (index)}
+              onCheckedChange={() => handleToggleWeekDay(index)}
               key={weekDay}
+              checked={weekDays.includes(index)}
               className="flex items-center gap-3 group"
             >
               <div className="h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-date-[state=checked]:border-green-500">
