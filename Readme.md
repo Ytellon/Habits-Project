@@ -1,5 +1,11 @@
 <h1 align="center"> Habits </h1>
 
+## 💻 Projeto
+
+O Habits é um app para controlar os hábitos do dia a dia do usuário em prol de uma vida mais saudável ou mesmo para controlar tarefas importantes do dia a dia. ✅ 🗓️
+
+----
+
 <p align="center">
 NLW é um evento exclusivo e gratuito, promovido pela Rocketseat para ensino de tecnologias WEB. <br/>
 </p>
@@ -33,6 +39,6 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Radix
 - TailwindCSS
 
-## 💻 Projeto
+## Em desenvolvimento [Mobile React]
 
-O Habits é um app para controlar os hábitos do dia a dia do usuário em prol de uma vida mais saudável ou mesmo para controlar tarefas importantes do dia a dia. ✅ 🗓️
+----
