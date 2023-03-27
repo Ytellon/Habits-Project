@@ -39,6 +39,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Radix
 - TailwindCSS
 
+<h3>Mobile</h3>
+- NativeWind
+
 ## Em desenvolvimento [Mobile React]
 
 ----
