@@ -1,4 +1,6 @@
-import { View, Text, ScrollView } from "react-native";
+import { useState, useEffect } from "react";
+import { View, Text, ScrollView, Alert } from "react-native";
+import { api } from "../lib/axios"
 
 import { generateRangeDatesFromYearStart } from "../utils/generate-range-between-dates";
 
@@ -13,8 +15,27 @@ const minimumSummaryDatesSizes = 18 * 5;
 const amountOfDaysToFill = minimumSummaryDatesSizes - datesFromYearStart.length;
 
 export function Home() {
-
+  const [ loading, setLoaging ] = useState(true);
+  const [ summary, setSummary ] = useState(null);
   const { navigate } = useNavigation();
+
+  useEffect(() => {
+    fetchdata();
+  },[]);
+
+  async function fetchdata() {
+    try {
+      setLoaging(true);
+      const response = await api.get('/summary');
+      console.log(response.data);
+      setSummary(response.data);
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Ops', 'não foi possível carregar o súmario de hábitos.');
+    } finally {
+      setLoaging(false);
+    }
+  }
 
   return (
     <View className="flex-1 bg-background px-8 pt-16">
