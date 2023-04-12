@@ -41,6 +41,9 @@ export function HabitDay({amountOfHabits = 0, amountCompleted = 0, date, ...rest
         ["border-white border-4"]: isCurrentDay,
       })}
       style={{ width: DAY_SYZE, height: DAY_MARGIN_BETWEEN }}
-    />
+      {...rest}
+    >
+
+    </TouchableOpacity>
   );
 }

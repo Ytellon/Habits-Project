@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, Text, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { api } from "../lib/axios"
 
 import { generateRangeDatesFromYearStart } from "../utils/generate-range-between-dates";
@@ -32,7 +32,6 @@ export function Home() {
     try {
       setLoaging(true);
       const response = await api.get('/summary');
-      console.log(response.data);
       setSummary(response.data);
     } catch (error) {
       console.log(error);
@@ -88,7 +87,7 @@ export function Home() {
                   date={date}
                   amountOfHabits={dayWithHabits?.amount}
                   amountCompleted={dayWithHabits?.completed}
-                  onPress={() => navigate('habit', { date: date.toISOString() })}
+                  onPress={() => navigate("habit", { date: date.toISOString() })}
                 />
               )
             })
