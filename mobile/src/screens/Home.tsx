@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { View, Text, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { api } from "../lib/axios"
 
@@ -8,7 +8,7 @@ import { HabitDay, DAY_SYZE } from "../components/HabitDay";
 
 import { Header } from "../components/Header";
 import { Loading } from "../components/Loading";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import dayjs from "dayjs";
 
 const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -41,9 +41,9 @@ export function Home() {
     }
   }
 
-   useEffect(() => {
+   useFocusEffect(useCallback(() => {
      fetchdata();
-   }, []);
+   }, []));
 
   if (loading) {
     return (
