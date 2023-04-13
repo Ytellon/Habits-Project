@@ -7,6 +7,7 @@ import { CheckBox } from "../components/CheckBox";
 import { api } from "../lib/axios";
 import { useState, useEffect } from "react";
 import { Loading } from "../components/Loading";
+import { generateProgressPorcentage } from '../utils/generate-progress-porcentage'
 
 interface Params {
   date: string;
@@ -31,6 +32,10 @@ export function Habit() {
   const parsedDate = dayjs(date);
   const dayOfWeek = parsedDate.format('dddd');
   const dayOfMonth = parsedDate.format('DD/MM');
+
+  const habitsProgress = dayInfo?.possibleHabits.length
+      ? generateProgressPorcentage(dayInfo.possibleHabits.length, completedHabits.length)
+      : 0;
 
   async function fetchHabits() {
     try {
@@ -81,11 +86,10 @@ export function Habit() {
           {dayOfMonth}
         </Text>
 
-        <ProgressBar progress={30} />
+        <ProgressBar progress={habitsProgress} />
 
         <View className="mt-6">
-          {
-            dayInfo?.possibleHabits &&
+          {dayInfo?.possibleHabits &&
             dayInfo?.possibleHabits.map((habit) => (
               <CheckBox
                 key={habit.id}
@@ -93,11 +97,9 @@ export function Habit() {
                 checked={completedHabits.includes(habit.id)}
                 onPress={() => handleToggleHabit(habit.id)}
               />
-            ))
-          }
+            ))}
         </View>
       </ScrollView>
-      
     </View>
   );
 }
