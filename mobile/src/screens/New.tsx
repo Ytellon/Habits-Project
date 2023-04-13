@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextInput, TouchableOpacity } from "react-native";
 import { ScrollView, View, Text } from "react-native";
-import { BackButton } from "../components/backButton";
+import { BackButton } from "../components/BackButton";
 import { CheckBox } from "../components/CheckBox";
 import { Feather } from "@expo/vector-icons";
 import colors from "tailwindcss/colors";

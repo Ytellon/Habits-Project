@@ -1,6 +1,6 @@
 import { ScrollView, View, Text, Alert } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { BackButton } from "../components/backButton";
+import { BackButton } from "../components/BackButton";
 import dayjs from "dayjs";
 import { ProgressBar } from "../components/ProgressBar";
 import { CheckBox } from "../components/CheckBox";
@@ -8,6 +8,7 @@ import { api } from "../lib/axios";
 import { useState, useEffect } from "react";
 import { Loading } from "../components/Loading";
 import { generateProgressPorcentage } from '../utils/generate-progress-porcentage'
+import { HabitsEmpty } from "../components/HabitsEmpty";
 
 interface Params {
   date: string;
@@ -89,15 +90,18 @@ export function Habit() {
         <ProgressBar progress={habitsProgress} />
 
         <View className="mt-6">
-          {dayInfo?.possibleHabits &&
-            dayInfo?.possibleHabits.map((habit) => (
-              <CheckBox
-                key={habit.id}
-                title={habit.title}
-                checked={completedHabits.includes(habit.id)}
-                onPress={() => handleToggleHabit(habit.id)}
-              />
-            ))}
+          {
+            dayInfo?.possibleHabits ?
+              dayInfo?.possibleHabits.map((habit) => (
+                <CheckBox
+                  key={habit.id}
+                  title={habit.title}
+                  checked={completedHabits.includes(habit.id)}
+                  onPress={() => handleToggleHabit(habit.id)}
+                />
+              ))
+            : <HabitsEmpty />
+          }
         </View>
       </ScrollView>
     </View>
