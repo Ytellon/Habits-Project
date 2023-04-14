@@ -7,7 +7,14 @@ O Habits é um app para controlar os hábitos do dia a dia do usuário em prol d
 ----
 
 <p align="center">
-NLW é um evento exclusivo e gratuito, promovido pela Rocketseat para ensino de tecnologias WEB. <br/>
+Para rodar localmente clone o repositório e rode:
+<br>
+
+```
+$ cd server && npm run dev
+$ cd web && npm run dev
+$ cd mobile && npm start
+```
 </p>
 
 <p align="center">
@@ -39,9 +46,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Radix
 - TailwindCSS
 
-<h3>Mobile</h3>
+## [Mobile React]
+- React Native
 - NativeWind
+- Expo
+- Typescript
 
-## Em desenvolvimento [Mobile React]
 
 ----
